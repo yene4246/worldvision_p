@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>worldvoion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    mobile_menu();
+});
+
+function mobile_menu(){
+    /* 변수 선언 */
+    var $menu = null;
+    var $left_gnb = null; // 영역 전체
+    var $depth1_wrap = null;
+    var $depth1 = null;
+    var $depth1_btn = null;
+    
+    /* 시작 함수 */
+    function start(){
+        init();
+        init_event();
+    }
+    /* 변수 초기화 함수 */
+    function init(){
+        $menu = $('.m_menu');
+        $left_gnb = $('.left_gnbWrap'); // 영역 전체
+        $depth1_wrap = $('.left_gnb>li');
+        $depth1 = $depth1_wrap.children('ul');
+        $depth1_btn = $depth1_wrap.children('a');
+    }
+    /* 이벤트 함수 */
+    function init_event(){
+        
+        /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+        $menu.click(function(event){
+            event.preventDefault();
+            $left_gnb.addClass('on');
+        });
+        
+        /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+        $('.close').click(function(event){
+            event.preventDefault();
+
+            $left_gnb.removeClass('on');
+            
+            // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+            setTimeout(function(){
+                $depth1_btn.removeClass('on');
+                $depth1.slideUp();
+            },300)
+        });
+        
+        /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+        $depth1_btn.click(function(event){
+            event.preventDefault();
+            var $this = $(this);
+            var $this_ul = $this.siblings('ul');
+
+            var check = $this.hasClass('on');
+            if(check){
+                $this.removeClass('on');
+                $this_ul.stop(true,true).slideUp();
+            }else{
+                $depth1_btn.removeClass('on');
+                $depth1.stop().slideUp();
+                $this.addClass('on');
+                $this_ul.stop(true,true).slideDown();
+            }
+        });
+        
+        /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+        $(window).resize(function(){
+            $left_gnb.removeClass('on');
+        });
+    }
+    
+    start(); // 시작 호출
+}
+</script>
+</head>
+<body>
+   <div id="warp">
+       <header id="header">
+           <div class="header_s">
+               <div class="inner">
+                   <div class="logo">
+                       <a href="index.html"><img src="images/logo_top.png" alt="logo"></a>
+                   </div>
+                   <div class="my_btn">
+                       <a href="#"><img src="images/m_icon2.png" alt=""></a>
+                   </div>
+                   
+                   <div class="menu_s">
+                       <div class="sub_m">
+                           <ul class="sub_list">
+                               <li>마이월드</li>
+                               <li>자료센터</li>
+                               <li>참여하기</li>
+                           </ul>
+                       </div>
+                       <div class="menu">
+                           <ul class="menu_list">
+                               <li><a href="#">월드비전</a></li>
+                               <li><a href="worldvision_sub.html">후원안내</a></li>
+                               <li><a href="#">사업안내</a></li>
+                               <li><a href="#">캠페인</a></li>
+                               <li><a href="#">스토리</a></li>
+                               
+                               <div class="submenu">
+                                   <ul>
+                                       <li><a href="#">월드비전</a></li>
+                                       <li><a href="#">국제월드비전</a></li>
+                                       <li><a href="#">한국월드비전</a></li>
+                                   </ul>
+                                   
+                                   <ul>
+                                       <li><a href="worldvision_sub.html">후원안내</a></li>
+                                       <li><a href="#">아동후원</a></li>
+                                       <li><a href="#">사업후원</a></li>
+                                       <li><a href="#">기업후원</a></li>
+                                       <li><a href="#">특별후원</a></li>
+                                       <li><a href="#">후원신청</a></li>
+                                   </ul>
+                                   
+                                   <ul>
+                                       <li><a href="#">국제개발사업</a></li>
+                                       <li><a href="#">국제구호사업</a></li>
+                                       <li><a href="#">국내사업</a></li>
+                                       <li><a href="#">북한사업</a></li>
+                                   </ul>
+                                   
+                                   <ul>
+                                       <li><a href="#">캠페인</a></li>
+                                   </ul>
+                                   
+                                   <ul>
+                                       <li><a href="#">스토리</a></li>
+                                   </ul>
+                               </div>
+                           </ul>
+                            <div class="m_menu">
+                                 <a href="#">
+                                     <img src="images/m_icon1.png" alt="">
+                                 </a>
+                            </div>
+                            <nav class="left_gnbWrap">
+                                <a href="#" class="close"><span>홍길동님의<br>월드비전</span></a>
+                                <ul class="left_gnb">
+                                    <li>
+                                        <a href="#">월드비전</a>
+                                        <ul>
+                                            <li><a href="#">월드비전</a></li>
+                                            <li><a href="#">국제월드비전</a></li>
+                                            <li><a href="#">한국월드비전</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">후원안내</a>
+                                        <ul>
+                                            <li><a href="#">후원안내</a></li>
+                                            <li><a href="#">아동후원</a></li>
+                                            <li><a href="#">사업후원</a></li>
+                                            <li><a href="#">기업후원</a></li>
+                                            <li><a href="#">특별후원</a></li>
+                                            <li><a href="#">후원신청</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">사업안내</a>
+                                        <ul>
+                                            <li><a href="#">국제개발사업</a></li>
+                                            <li><a href="#">국제구호사업</a></li>
+                                            <li><a href="#">국내사업</a></li>
+                                            <li><a href="#">북한사업</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">캠페인</a>
+                                        <ul>
+                                            <li><a href="#">캠페인</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">스토리</a>
+                                        <ul>
+                                            <li><a href="#">스토리</a></li>
+                                        </ul>
+                                    </li>
+                               </ul>
+                           </nav>
+                            
+                           <ul class="icon">
+                               <li><a href="#"><img src="images/icon_2.png"></a></li>
+                               <li><a href="#"><img src="images/icon_1.png"></a></li>
+                           </ul>
+                       </div>
+                   </div>
+                   
+               </div>
+           </div>
+       </header>
+       
+       <article id="mainimg">
+           <div class="box">
+               <a href="#">하루팔찌로 함께하기</a>
+           </div>
+       </article>
+       
+       <main id="contenes">
+           <section class="campaign">
+               <h1 class="hidden">캠페인</h1>
+               <h2>월드비전 캠페인</h2>
+               <p>미래의 희망, 우리 아동을 지켜주세요</p>
+               <div class="cam_s">
+                   <div class="btn_l">
+                       <img src="images/before_1.png" alt="이전">
+                   </div>
+                   <div class="list">
+                       <div class="slide">
+                           <img src="images/campaign_1.jpg" alt="새롬이">
+                           <h4>[위기아동캠페인]</h4>
+                           <p>하루 세 걸음, 8살 새롬이의 걸음마</p>
+                       </div>
+                       <div class="slide">
+                           <img src="images/campaign_2.jpg" alt="여아동">
+                           <h4>[해외여아위생캠페인]</h4>
+                           <p>1년 평균 생리기간 60일. 생리대가 없어<br>
+                           고통받는 소녀들을 지키는 Protect 60.</p>
+                       </div>
+                       <div class="slide">
+                           <img src="images/campaign_3.jpg" alt="새롬이">
+                           <h4>[해외아동후원캠페인]</h4>
+                           <p>세상에 없던 아동후원을 소개합니다.<br>
+                           CHOSEN, 아이의 선택.</p>
+                       </div>
+                   </div>
+                   <div class="btn_r">
+                       <img src="images/next_1.png" alt="다음">
+                   </div>
+               </div>
+           </section>
+           
+           <section class="banner_top">
+              <h1 class="hidden">지켜주세요 배너</h1>
+              
+              <div class="banner_s">
+                 <div class="top"></div>
+                 <div class="text">
+                   <h4>지켜주세요!</h4>
+                   <h1>작은나눔, 큰 행복</h1>
+                   <p>모두가 아는 이야기, 그러나 내아이의 이야기가 아니기에 관심 받지 못하는 이야기<br>
+                   지금 이순간에도 5초에 1명씩 아이들이 죽어가고 있습니다.<br>
+                   작은 나눔으로 아이들의 웃음을 지켜주세요.</p>
+                 </div>
+                 <div class="bottom"></div>
+                 <div class="imgbox">
+                     <img src="images/banner_img.png">
+                 </div>
+                 
+                 <div class="clik_box">
+                   <a href="#">후원하기</a>
+                 </div>
+              </div>
+           </section>
+           
+           <section class="story">
+               <h1 class="hidden">스토리</h1>
+               <h2>월드비전 스토리</h2>
+               <p>함께하면 큰 행복이 되는 월드비전의 이야기</p>
+               <div class="story_s">
+                   <div class="img_box">
+                       <img src="images/story.jpg">
+                   </div>
+                   <div class="m_img">
+                       <img src="images/m_storyimg.jpg">
+                   </div>
+                   <div class="text_box">
+                      <div class="text">
+                       <i><img src="images/icon_7.png" alt="따옴표"></i>
+                       <h3>코로나도 우리의 꿈을<br>막을 순 없다! (시즌)</h3>
+                       <h4>- 유튜버 채채Ⅹ영주와 라이브로 만난 아이들 -</h4>
+                       <p>유튜버 채채Ⅹ영주가 월드비전 꿈디자이너<br>
+                       비전원정대 라이브 방송으로 아이들을 만났습니다.<br>
+                       코로나19 속에서도 우리 아이들의<br>
+                       꿈을 막을 순 없습니다.<br>
+                       월드비전은 아이들의 꿈을 지지합니다.</p>
+                       <div class="btn">
+                       <a href="#">스토리 보기</a>
+                       </div>
+                       <div class="btn_box">
+                           <a href="a"></a>
+                           <a href="a"></a>
+                           <a href="a"></a>
+                       </div>
+                      </div>
+                   </div>
+               </div>
+           </section>
+           
+           <section class="sns">
+              <h1 class="hidden">인스타 홍보</h1>
+               <div class="text">
+                   <h2>
+                   <span class="text_1">하루팔찌</span>가 늘어날 수록 더 많은
+                   <span class="text_2"> 전쟁피해 아동들이 안전하게 보호 </span>받습니다.<br>이미 <span class="text_3">1500명</span>
+                   <span class="text_6">의 보호자님</span>들이 하루팔찌로 아이들의 하루를 지켜주고 있습니다.</h2>
+                   <h4>
+                   <span class="text_4">인스타그램</span>에 아래 해시태그와 함께 <span class="text_5">여러분의 하루팔찌를 자랑해주세요.</span>
+                   </h4>
+                   <p>#월드비전하루팔찌  #giveaniceday  #하루팔찌  
+                   #전쟁피해아동캠페인  #기부팔찌</p>
+                </div>
+                
+                <div class="instar">
+                    <div class="before">
+                        <img src="images/before_2.png" alt="이전버튼">
+                    </div>
+                    <div class="poto">
+                        <div class="imgs">
+                            <a href="#"></a>
+                            <div class="text">
+                                <p><span>@heedoong_</span><br>
+                                <br>
+                                남편의 첫 기부<br>
+                                역사에 관심이 많은 남편은<br>
+                                첫 기부도 전쟁 피해 아동을 돕는 것으로 시작했다<br>
+                                <br>
+                                어릴 적 부모님께선<br>
+                                언젠가 내가 돈을 벌게 되면<br>
+                                월급의 1%는 꼭 기부하라고 하셨다<br>
+                                사람을 뜻하는 한자가 서로 기댄 모습인 것처럼<br>
+                                기댈 곳이 있어야 사람 사는 세상인거고<br>
+                                부담스럽지 않은 금액이어야<br>
+                                꾸준히 계속 할 수 있다고도 덧붙여주시면서<br>
+                                <br>
+                                사회와는 거릴 두는 세상<br>
+                                마음 속 거리는 지구 반대편에도 닿을 수 있었다<br>
+                                <br>
+                                #월드비전하루팔찌 #월드비전 #전쟁피해아동캠페인<br>
+                                #기부팔찌 #giveaniceday
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="imgs">
+                            <a href="#"></a>
+                            <div class="text">
+                                <p><span>@ahnkyoungmo</span><br>
+                                <br>
+                                #월드비전하루팔찌 #giveaniceday<br>
+                                #월드비전 #전쟁피해아동캠페인 #기부팔찌
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="imgs">
+                            <a href="#"></a>
+                            <div class="text">
+                                <p><span>@pkenbe_99</span><br>
+                                <br>
+                                Give a nice day<br>
+                                전세계 모든 사람들이 어느정도의 안전, 평화, 행복을<br>
+                                함께 누릴 수 있기를 바라며 후원을<br>
+                                안할 수가 없는 색색별 표시<br>
+                                <span class="no_1">♥</span> 피난민<br>
+                                <span class="no_2">♥</span>
+                                 영양실조, 성폭력피해, 장애인 (특별보호필요대상)<br>
+                                <span class="no_3">♥</span>
+                                 전쟁고아 (보호자 연결 필요아동)<br>
+                                .<br>
+                                .<br>
+                                _어여쁜 아이들이 마땅히 받아야 할 행복을 느낄 수<br>
+                                있도록 후원들이 작게나마 도움이 될 수 있다면 좋겠어,<br>
+                                이 후 부터는 전쟁피난민 아이들에게도 정말 어여쁜<br>
+                                날들만 함께하길<br>
+                                <br>
+                                #월드비전하루팔찌 #giveaniceday #월드비전<br>
+                                #전쟁피해아동캠페인 #기부팔찌
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="imgs">
+                            <a href="#"></a>
+                            <div class="text">
+                                <p><span>@_deoook</span><br>
+                                <br>
+                                전쟁아동 피해 후원🙌<br>
+                                혼자해오던 후원보다도<br>
+                                함께라서 더 의미있는 후원<br>
+                                모든 사람들이 행복한 세상이 찾아오길<br>
+                                (디자인도 너무 이쁘다)<br>
+                                <br>
+                                #월드비전하루팔찌 #giveaniceday #월드비전<br>
+                                #전쟁피해아동캠패인 #기부팔찌 #후원 #데일리<br>
+                                #팔로우 #일상 #daily #follow #worldvision<br>
+                                #instagram
+                                </p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                        
+                    
+                    <div class="next">
+                        <img src="images/next_2.png" alt="다음버튼">
+                    </div>
+                </div>
+           </section>
+           
+           <section class="banner_bottom">
+               <div class="web_img">
+                   <img src="images/banner_bottom.jpg" alt="">
+               </div>
+               <div class="m_img">
+                   <img src="images/m_bannerimg02.jpg" alt="">
+               </div>
+           </section>
+       </main>
+       
+       <footer id="footer">
+           <div class="f_inner">
+               <div class="f_top">
+                   <div class="f_left">
+                       <h4>바로가기</h4>
+                       <div class="navi">
+                           <ul>
+                               <li><a href="#">후원하기</a></li>
+                               <li><a href="#">스토리</a></li>
+                               <li><a href="#">사업소개</a></li>
+                               <li><a href="#">사이트맵</a></li>
+                           </ul>
+                           <ul>
+                               <li><a href="#">월드비전</a></li>
+                               <li><a href="#">자료센터</a></li>
+                               <li><a href="#">참여하기</a></li>
+                               <li><a href="#">마이월드비전</a></li>
+                           </ul>
+                           <ul>
+                               <li><a href="#">인재채용</a></li>
+                               <li><a href="#">F&Q</a></li>
+                               <li><a href="#">온라인상담</a></li>
+                           </ul>
+                       </div>
+                       <div class="f_sns">
+                           <a href="#">
+                               <img src="images/icon_3.png">
+                           </a>
+                           <a href="#">
+                               <img src="images/icon_4.png">
+                           </a>
+                           <a href="#">
+                               <img src="images/icon_5.png">
+                           </a>
+                           <a href="#">
+                               <img src="images/icon_6.png">
+                           </a>
+                       </div>
+                   </div>
+                   <div class="line"></div>
+                   <div class="f_right">
+                       <div class="f_logo">
+                           <a href="index.html"><img src="images/logo_bottom.png"></a>
+                       </div>
+                       <h4><span>대표전화 02-2078-7000</span><br>
+                       상담시간 (월~금) 09:00~18:00<br></h4>
+                       <p>07327 서울시 영등포구 여의나루로 77-1<br>
+                       <span class="no_1">사회복지법인 월드비전</span><br>
+                       <span class="no_2">사업자번호 116-82-00276 회장 양호승</span></p>
+                   </div>
+               </div>
+               <div class="f_bottom">
+                   <p>WFP 최대 공식 협력기관｜2010 호암상 사회복지상 대상 수상｜2010 대한   민국 BSC 전략경영대상 수상｜ 제3회 삼일투명경영대상 수상기관<br>
+                    개인정보처리방침｜아동정보정책｜이용약관｜이메일 무단 수집거부</p>
+               </div>
+           </div>
+       </footer>
+   </div>
+    
+</body>
+</html>
