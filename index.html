@@ -80,6 +80,16 @@ function mobile_menu(){
     
     start(); // 시작 호출
 }
+    jQuery(document).ready(function() {
+
+            $('#mainimg a:gt(0)').hide();
+            setInterval(function() {
+                $('#mainimg a:first-child').fadeOut()
+                    .next('a').fadeIn()
+                    .end().appendTo('#mainimg');
+            }, 3000);
+
+        });
 </script>
 </head>
 <body>
@@ -205,9 +215,10 @@ function mobile_menu(){
        </header>
        
        <article id="mainimg">
-           <div class="box">
-               <a href="#">하루팔찌로 함께하기</a>
-           </div>
+           <a href="#"><img src="images/main_img01.jpg" alt=""></a>
+           <a href="#"><img src="images/mainimg_2.jpg" alt=""></a>
+           <a href="#"><img src="images/mainimg_3.jpg" alt=""></a>
+           
        </article>
        
        <main id="contenes">
